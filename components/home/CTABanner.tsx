@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { MessageCircle } from 'lucide-react'
 
-const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '918849323139'
+const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '918866008868'
 const waMessage = encodeURIComponent("Hi! I'd like to inquire about booking Photofilms for my wedding.")
 
 const BG_VIDEO =

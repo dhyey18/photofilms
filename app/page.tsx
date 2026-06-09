@@ -22,7 +22,7 @@ const jsonLd = {
   name: 'Photofilms',
   description: 'Luxury wedding photography and cinematography studio based in Vadodara, Gujarat.',
   url: 'https://photofilms.in',
-  telephone: '+918849323139',
+  telephone: '+918866008868',
   email: 'hello@photofilms.in',
   image: 'https://photofilms.in/images/slider/01.webp',
   address: {

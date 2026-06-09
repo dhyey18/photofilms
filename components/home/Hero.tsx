@@ -19,7 +19,7 @@ const slides = [
   { src: 'https://photofilms.in/images/slider/10.webp', alt: 'Heritage venue wedding' },
 ]
 
-const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '918849323139'
+const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '918866008868'
 const waMessage = encodeURIComponent("Hi! I'd like to check availability and book Photofilms for my wedding.")
 const waHref = `https://wa.me/${number}?text=${waMessage}`
 
