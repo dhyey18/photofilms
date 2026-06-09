@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,30 +8,32 @@ import { Play, X } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 
-const videos = [
+const cards = [
   {
-    pexelsId: 3936463,
     title: 'Wedding Highlight Film',
     subtitle: 'Slow-motion cinematic wedding moments',
     poster: 'https://photofilms.in/images/slider/03.webp',
+        video: '/136133-764371501_medium.mp4',
+
   },
   {
-    pexelsId: 35300398,
     title: 'Floral & Décor Stories',
     subtitle: 'Elegant Indian wedding decoration',
     poster: 'https://photofilms.in/images/slider/06.webp',
+    video: '/157657-815175893_medium.mp4',
   },
   {
-    pexelsId: 31139763,
     title: 'Sacred Rituals',
     subtitle: 'Traditional ceremony documentation',
     poster: 'https://photofilms.in/images/slider/09.webp',
+    video: '/14299460-hd_1920_1080_25fps.mp4',
+
   },
 ]
 
-type Video = (typeof videos)[number]
+type Card = (typeof cards)[number]
 
-function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
+function VideoModal({ card, onClose }: { card: Card; onClose: () => void }) {
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', handleKey)
@@ -47,41 +49,54 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10"
-      style={{ backgroundColor: 'rgba(28,26,24,0.96)' }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[200] flex items-center justify-center"
+      style={{ backgroundColor: 'rgba(18,16,14,0.92)', backdropFilter: 'blur(6px)' }}
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.93, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.93, opacity: 0 }}
-        transition={{ duration: 0.22 }}
-        className="relative w-full max-w-5xl"
+        initial={{ scale: 0.95, opacity: 0, y: 16 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.95, opacity: 0, y: 16 }}
+        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        className="relative w-full max-w-4xl mx-4 md:mx-10 bg-dark border border-warm-white/10 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between mb-3">
+        {/* Gold accent top bar */}
+        <div className="h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
+
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-warm-white/8">
           <div>
-            <h3 className="text-warm-white font-serif text-lg">{video.title}</h3>
-            <p className="text-warm-white/50 text-xs mt-0.5">{video.subtitle}</p>
+            <p className="text-gold text-xs font-semibold uppercase tracking-[0.2em]">
+              Photofilms · Cinematic Stories
+            </p>
+            <h3 className="font-serif text-warm-white text-xl mt-0.5">{card.title}</h3>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="flex items-center gap-1.5 text-warm-white/60 hover:text-warm-white text-sm transition-colors ml-4 shrink-0"
+            className="flex items-center justify-center w-9 h-9 border border-warm-white/20 text-warm-white/50 hover:text-warm-white hover:border-warm-white/40 transition-colors"
+            aria-label="Close"
           >
             <X className="w-4 h-4" />
-            <span className="hidden sm:inline">Close</span>
           </button>
         </div>
-        <div className="aspect-video">
-          <iframe
-            src={`https://www.pexels.com/video/${video.pexelsId}/embed/?autoplay=1`}
-            title={video.title}
-            className="w-full h-full border-0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
+
+        {/* Video */}
+        <div className="aspect-video bg-black">
+          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+          <video
+            src={card.video}
+            controls
+            className="w-full h-full"
+            poster={card.poster}
           />
+        </div>
+
+        {/* Footer hint */}
+        <div className="px-6 py-3 border-t border-warm-white/8">
+          <p className="text-warm-white/30 text-xs">Press Esc or click outside to close</p>
         </div>
       </motion.div>
     </motion.div>,
@@ -90,73 +105,105 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
 }
 
 function VideoCard({
-  video,
+  card,
   onPlay,
   featured = false,
 }: {
-  video: Video
+  card: Card
   onPlay: () => void
   featured?: boolean
 }) {
-  const [hovered, setHovered] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [previewing, setPreviewing] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => { setMounted(true) }, [])
+
+  const handleMouseEnter = () => {
+    setPreviewing(true)
+    videoRef.current?.play().catch(() => {})
+  }
+
+  const handleMouseLeave = () => {
+    setPreviewing(false)
+    if (videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
+  }
 
   return (
     <button
       type="button"
       onClick={onPlay}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="relative w-full h-full overflow-hidden group block"
     >
+      {/* Poster image — fades out when video preview plays */}
       <Image
-        src={video.poster}
-        alt={video.title}
+        src={card.poster}
+        alt={card.title}
         fill
-        className={`object-cover transition-transform duration-700 ${hovered ? 'scale-105' : 'scale-100'}`}
+        className={`object-cover transition-opacity duration-500 ${previewing ? 'opacity-0' : 'opacity-100'}`}
         sizes={featured ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
       />
+
+      {/* Hover-preview video — client-only to avoid SSR hydration mismatch */}
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+      {mounted && (
+        <video
+          ref={videoRef}
+          src={card.video}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+            previewing ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      )}
+
+      {/* Overlay */}
       <div
         className={`absolute inset-0 transition-colors duration-300 ${
-          hovered ? 'bg-dark/60' : 'bg-dark/40'
+          previewing ? 'bg-dark/30' : 'bg-dark/40'
         }`}
       />
 
-      {/* Play ring */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div
-          className={`flex items-center justify-center rounded-full border-2 backdrop-blur-sm transition-all duration-300 ${
-            hovered
-              ? 'w-20 h-20 border-gold bg-dark/30'
-              : 'w-14 h-14 border-warm-white/70 bg-dark/20'
-          }`}
-        >
+      {/* Play ring — hidden while preview plays */}
+      <div
+        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+          previewing ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
+        <div className="flex items-center justify-center w-14 h-14 rounded-full border-2 border-warm-white/70 bg-dark/20 backdrop-blur-sm group-hover:w-20 group-hover:h-20 group-hover:border-gold group-hover:bg-dark/30 transition-all duration-300">
           <Play
-            className={`ml-0.5 transition-all duration-300 ${
-              hovered ? 'w-7 h-7 text-gold-light' : 'w-5 h-5 text-warm-white'
-            }`}
+            className="ml-0.5 w-5 h-5 text-warm-white group-hover:w-7 group-hover:h-7 group-hover:text-gold-light transition-all duration-300"
             fill="currentColor"
           />
         </div>
       </div>
 
-      {/* Label gradient */}
+      {/* Label */}
       <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-dark/80 to-transparent">
         <p
           className={`text-warm-white font-medium leading-tight ${
             featured ? 'text-base' : 'text-sm'
           }`}
         >
-          {video.title}
+          {card.title}
         </p>
-        <p className="text-warm-white/55 text-xs mt-0.5">{video.subtitle}</p>
+        <p className="text-warm-white/55 text-xs mt-0.5">{card.subtitle}</p>
       </div>
     </button>
   )
 }
 
 export default function VideoShowreel() {
-  const [activeVideo, setActiveVideo] = useState<Video | null>(null)
-  const close = useCallback(() => setActiveVideo(null), [])
+  const [activeCard, setActiveCard] = useState<Card | null>(null)
+  const close = useCallback(() => setActiveCard(null), [])
 
   return (
     <>
@@ -175,33 +222,29 @@ export default function VideoShowreel() {
           {/* Editorial asymmetric grid: large left + 2 stacked right */}
           <div className="mt-14 flex flex-col gap-3 md:grid md:grid-cols-3 md:grid-rows-2 md:h-[480px]">
             <ScrollReveal delay={0} className="h-72 md:h-auto md:col-span-2 md:row-span-2">
-              <VideoCard
-                video={videos[0]}
-                onPlay={() => setActiveVideo(videos[0])}
-                featured
-              />
+              <VideoCard card={cards[0]} onPlay={() => setActiveCard(cards[0])} featured />
             </ScrollReveal>
-            {videos.slice(1).map((video, i) => (
+            {cards.slice(1).map((card, i) => (
               <ScrollReveal
-                key={video.pexelsId}
+                key={card.title}
                 delay={(i + 1) * 0.12}
                 className="h-52 md:h-auto"
               >
-                <VideoCard video={video} onPlay={() => setActiveVideo(video)} />
+                <VideoCard card={card} onPlay={() => setActiveCard(card)} />
               </ScrollReveal>
             ))}
           </div>
 
           <ScrollReveal delay={0.35}>
             <p className="mt-8 text-center text-warm-white/30 text-xs tracking-wide">
-              Sample films for illustration · Full Photofilms portfolio available on consultation
+              Hover to preview · Click to watch full film
             </p>
           </ScrollReveal>
         </div>
       </section>
 
       <AnimatePresence>
-        {activeVideo && <VideoModal video={activeVideo} onClose={close} />}
+        {activeCard && <VideoModal card={activeCard} onClose={close} />}
       </AnimatePresence>
     </>
   )
