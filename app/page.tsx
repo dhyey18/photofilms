@@ -3,6 +3,8 @@ import Hero from '@/components/home/Hero'
 import SocialProof from '@/components/home/SocialProof'
 import ServicesPreview from '@/components/home/ServicesPreview'
 import PortfolioPreview from '@/components/home/PortfolioPreview'
+import MarqueeStrip from '@/components/home/MarqueeStrip'
+import OurProcess from '@/components/home/OurProcess'
 import VideoShowreel from '@/components/home/VideoShowreel'
 import TestimonialsCarousel from '@/components/home/TestimonialsCarousel'
 import InstagramFeed from '@/components/home/InstagramFeed'
@@ -62,8 +64,10 @@ export default function HomePage() {
       />
       <Hero />
       <SocialProof />
+      <MarqueeStrip />
       <ServicesPreview />
       <PortfolioPreview />
+      <OurProcess />
       <VideoShowreel />
       <TestimonialsCarousel />
       <InstagramFeed />
