@@ -1,0 +1,149 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X } from 'lucide-react'
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/about', label: 'About' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
+]
+
+export default function Navigation() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
+  const isHome = pathname === '/'
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        scrolled || menuOpen || !isHome
+          ? 'bg-warm-white/95 backdrop-blur-sm shadow-sm'
+          : 'bg-transparent'
+      }`}
+    >
+      <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
+        {/* Logo */}
+        <Link
+          href="/"
+          className={`font-serif text-2xl font-bold tracking-tight transition-colors ${
+            scrolled || menuOpen || !isHome ? 'text-dark' : 'text-warm-white'
+          }`}
+        >
+          photo<span className="text-gold">films</span>
+        </Link>
+
+        {/* Desktop nav */}
+        <ul className="hidden lg:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={`text-sm font-medium tracking-wide transition-colors duration-200 ${
+                  pathname === link.href
+                    ? 'text-gold'
+                    : scrolled || !isHome
+                    ? 'text-dark-muted hover:text-dark'
+                    : 'text-warm-white/80 hover:text-warm-white'
+                }`}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop CTA */}
+        <div className="hidden lg:block">
+          <Link
+            href="/contact"
+            className="bg-gold text-dark text-sm font-semibold px-6 py-2.5 tracking-wide hover:bg-gold-dark transition-colors duration-200"
+          >
+            Book Your Date
+          </Link>
+        </div>
+
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className={`lg:hidden p-2 transition-colors ${
+            scrolled || menuOpen || !isHome ? 'text-dark' : 'text-warm-white'
+          }`}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+        >
+          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="lg:hidden bg-warm-white border-t border-border overflow-hidden"
+          >
+            <ul className="px-6 py-6 flex flex-col gap-1">
+              {navLinks.map((link, i) => (
+                <motion.li
+                  key={link.href}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <Link
+                    href={link.href}
+                    className={`block py-3 text-lg font-medium border-b border-border/40 transition-colors ${
+                      pathname === link.href ? 'text-gold' : 'text-dark hover:text-gold'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.li>
+              ))}
+              <motion.li
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.05 }}
+                className="pt-4"
+              >
+                <Link
+                  href="/contact"
+                  className="block w-full text-center bg-gold text-dark font-semibold py-3 tracking-wide hover:bg-gold-dark transition-colors"
+                >
+                  Book Your Date
+                </Link>
+              </motion.li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  )
+}
