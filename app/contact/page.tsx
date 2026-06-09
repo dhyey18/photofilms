@@ -14,7 +14,7 @@ interface Props {
   searchParams: Promise<{ service?: string }>
 }
 
-const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '919876543210'
+const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '918849323139'
 const waMessage = encodeURIComponent("Hi! I'd like to inquire about booking Photofilms for my wedding.")
 const waHref = `https://wa.me/${number}?text=${waMessage}`
 
@@ -47,7 +47,7 @@ export default async function ContactPage({ searchParams }: Props) {
                     <Phone className="w-4 h-4 text-gold mt-0.5 shrink-0" />
                     <div>
                       <p className="font-medium text-dark">Phone / WhatsApp</p>
-                      <a href="tel:+919876543210" className="text-warm-gray hover:text-gold transition-colors">+91 98765 43210</a>
+                      <a href="tel:+918849323139" className="text-warm-gray hover:text-gold transition-colors">+91 88493 23139</a>
                     </div>
                   </li>
                   <li className="flex items-start gap-3 text-sm">

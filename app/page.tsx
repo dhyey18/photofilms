@@ -3,6 +3,7 @@ import Hero from '@/components/home/Hero'
 import SocialProof from '@/components/home/SocialProof'
 import ServicesPreview from '@/components/home/ServicesPreview'
 import PortfolioPreview from '@/components/home/PortfolioPreview'
+import VideoShowreel from '@/components/home/VideoShowreel'
 import TestimonialsCarousel from '@/components/home/TestimonialsCarousel'
 import InstagramFeed from '@/components/home/InstagramFeed'
 import FAQAccordion from '@/components/home/FAQAccordion'
@@ -21,7 +22,7 @@ const jsonLd = {
   name: 'Photofilms',
   description: 'Luxury wedding photography and cinematography studio based in Vadodara, Gujarat.',
   url: 'https://photofilms.in',
-  telephone: '+919876543210',
+  telephone: '+918849323139',
   email: 'hello@photofilms.in',
   image: 'https://photofilms.in/images/slider/01.webp',
   address: {
@@ -44,7 +45,7 @@ const jsonLd = {
   },
   priceRange: '₹₹₹',
   sameAs: [
-    'https://instagram.com/photofilms',
+    'https://www.instagram.com/photofilms_/',
     'https://facebook.com/photofilms',
     'https://youtube.com/@photofilms',
   ],
@@ -63,6 +64,7 @@ export default function HomePage() {
       <SocialProof />
       <ServicesPreview />
       <PortfolioPreview />
+      <VideoShowreel />
       <TestimonialsCarousel />
       <InstagramFeed />
       <FAQAccordion />

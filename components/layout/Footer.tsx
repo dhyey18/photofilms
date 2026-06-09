@@ -24,7 +24,7 @@ export default function Footer() {
               Luxury wedding photography and cinematography based in Vadodara, Gujarat. Capturing love stories across India.
             </p>
             <div className="flex gap-4 mt-6">
-              <a href="https://instagram.com/photofilms" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-gold transition-colors">
+              <a href="https://www.instagram.com/photofilms_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-gold transition-colors">
                 <Camera className="w-5 h-5" />
               </a>
               <a href="https://facebook.com/photofilms" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-gold transition-colors">
@@ -60,7 +60,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 text-gold shrink-0" />
-                <a href="tel:+919876543210" className="hover:text-gold transition-colors">+91 98765 43210</a>
+                <a href="tel:+918849323139" className="hover:text-gold transition-colors">+91 88493 23139</a>
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 text-gold shrink-0" />

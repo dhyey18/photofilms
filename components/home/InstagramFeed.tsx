@@ -23,11 +23,11 @@ export default function InstagramFeed() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
             <SectionHeader
               eyebrow="Follow Along"
-              title="@photofilms"
+              title="@photofilms_"
               subtitle="Daily stories from our lens — follow us for behind-the-scenes and latest work."
             />
             <a
-              href="https://instagram.com/photofilms"
+              href="https://www.instagram.com/photofilms_/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 border-2 border-dark text-dark font-semibold px-5 py-3 text-sm tracking-wide hover:bg-dark hover:text-warm-white transition-colors duration-200 shrink-0"
@@ -42,7 +42,7 @@ export default function InstagramFeed() {
           {igPosts.map((post, i) => (
             <ScrollReveal key={i} delay={i * 0.04} className="md:col-span-1 aspect-square">
               <a
-                href="https://instagram.com/photofilms"
+                href="https://www.instagram.com/photofilms_/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative block w-full h-full overflow-hidden bg-surface"
