@@ -12,6 +12,7 @@ export const services: Service[] = [
     icon: 'Camera',
     category: 'photo',
     heroImage: S('01'),
+    videoUrl: '/136133-764371501_medium.mp4',
     features: [
       'Full-day coverage (8–16 hours)',
       'Two professional photographers',
@@ -30,6 +31,7 @@ export const services: Service[] = [
     icon: 'Heart',
     category: 'photo',
     heroImage: S('02'),
+    videoUrl: '/157657-815175893_medium.mp4',
     features: [
       '4–6 hour session',
       'Multiple outfit changes',
@@ -48,6 +50,7 @@ export const services: Service[] = [
     icon: 'Film',
     category: 'video',
     heroImage: S('03'),
+    videoUrl: '/14299460-hd_1920_1080_25fps.mp4',
     features: [
       '3–5 minute cinematic highlight reel',
       'Full ceremony & reception edit',
@@ -66,6 +69,7 @@ export const services: Service[] = [
     icon: 'Plane',
     category: 'specialty',
     heroImage: S('04'),
+    videoUrl: '/15083324_4096_2160_25fps.mp4',
     features: [
       'DGCA-licensed pilot',
       '4K aerial video footage',
@@ -84,6 +88,7 @@ export const services: Service[] = [
     icon: 'Briefcase',
     category: 'photo',
     heroImage: S('05'),
+    videoUrl: '/16024728_1920_1080_25fps.mp4',
     features: [
       'Full-event coverage',
       'Brand-consistent editing',
@@ -102,6 +107,7 @@ export const services: Service[] = [
     icon: 'User',
     category: 'photo',
     heroImage: S('06'),
+    videoUrl: '/14249219_1920_1080_100fps.mp4',
     features: [
       '1–2 hour session',
       'Studio or outdoor location',

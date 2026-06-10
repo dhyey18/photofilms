@@ -7,6 +7,7 @@ export interface Service {
   icon: string
   category: 'photo' | 'video' | 'specialty'
   heroImage: string
+  videoUrl?: string
   features: string[]
 }
 

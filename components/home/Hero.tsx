@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, MessageCircle } from 'lucide-react'
 
 /* Use the local cinematic reel already in /public */
-const HERO_VIDEO = '/136133-764371501_medium.mp4'
+const HERO_VIDEO = '/make_a_indian_weding_cenematic.mp4'
 
 const slides = [
   { src: 'https://photofilms.in/images/slider/01.webp', alt: 'Photofilms wedding photography' },

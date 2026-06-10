@@ -1,8 +1,11 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Camera, Heart, Film, Plane, Briefcase, User, ArrowRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { services } from '@/data/services'
-import SectionHeader from '@/components/ui/SectionHeader'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 
 const iconMap: Record<string, React.ElementType> = {
@@ -10,84 +13,222 @@ const iconMap: Record<string, React.ElementType> = {
 }
 
 export default function ServicesPreview() {
-  return (
-    <section className="py-24 px-6 bg-cream">
-      <div className="max-w-7xl mx-auto">
-        <ScrollReveal>
-          <SectionHeader
-            eyebrow="What We Offer"
-            title="Services crafted for your love story"
-            subtitle="From intimate portraits to grand cinematic productions, every service is tailored to your unique celebration."
-            centered
-          />
-        </ScrollReveal>
+  const [activeIndex, setActiveIndex] = useState(0)
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+  return (
+    <section className="bg-dark overflow-hidden">
+
+      {/* ── Section header ─────────────────────────────── */}
+      <div className="py-20 px-6 text-center border-b border-warm-white/8">
+        <ScrollReveal>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold mb-2">
+            What We Offer
+          </p>
+          <span className="block h-px w-10 bg-gold/50 mx-auto mb-7" />
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] text-warm-white leading-[1.1]">
+            Services crafted for{' '}
+            <em className="not-italic text-gold-light">your love story</em>
+          </h2>
+          <p className="mt-5 text-warm-white/50 text-lg max-w-xl mx-auto leading-relaxed">
+            From intimate portraits to grand cinematic productions, every service is
+            tailored to your unique celebration.
+          </p>
+        </ScrollReveal>
+      </div>
+
+      {/* ── Desktop: interactive split ─────────────────── */}
+      <div className="hidden lg:grid lg:grid-cols-[1fr_1.3fr]" style={{ minHeight: 580 }}>
+
+        {/* Left — numbered service list */}
+        <div className="border-r border-warm-white/8 flex flex-col">
           {services.map((service, i) => {
             const Icon = iconMap[service.icon] ?? Camera
-            const num = String(i + 1).padStart(2, '0')
+            const isActive = i === activeIndex
             return (
-              <ScrollReveal key={service.id} delay={i * 0.08}>
-                <div className="group bg-warm-white border border-border hover:border-gold/50 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(201,168,76,0.14)] transition-all duration-500 overflow-hidden flex flex-col h-full">
-                  {/* Image */}
-                  <div className="relative h-60 overflow-hidden">
-                    <Image
-                      src={service.heroImage}
-                      alt={service.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-dark/20 group-hover:bg-dark/10 transition-colors duration-500" />
+              <div
+                key={service.id}
+                onMouseEnter={() => setActiveIndex(i)}
+                className={`relative flex-1 border-b border-warm-white/8 last:border-b-0 cursor-default transition-colors duration-300 ${
+                  isActive ? 'bg-warm-white/[0.04]' : 'hover:bg-warm-white/[0.025]'
+                }`}
+              >
+                {/* Active accent bar */}
+                <motion.div
+                  className="absolute left-0 top-0 bottom-0 w-[3px] bg-gold"
+                  initial={false}
+                  animate={{ opacity: isActive ? 1 : 0 }}
+                  transition={{ duration: 0.2 }}
+                />
 
-                    {/* Number badge */}
-                    <span className="absolute top-4 left-4 font-serif text-4xl font-bold text-warm-white/20 leading-none select-none">
-                      {num}
-                    </span>
+                <div className="flex items-start gap-5 px-8 py-5">
+                  {/* Number */}
+                  <span
+                    className={`font-serif text-[2.6rem] font-bold leading-none shrink-0 select-none transition-colors duration-500 ${
+                      isActive ? 'text-gold' : 'text-warm-white/10'
+                    }`}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
 
-                    {/* Category chip */}
-                    <span className="absolute bottom-4 right-4 bg-dark/70 backdrop-blur-sm text-warm-white/80 text-[10px] font-semibold uppercase tracking-widest px-2.5 py-1">
-                      {service.category ?? 'Photography'}
-                    </span>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="p-2 bg-surface text-gold group-hover:bg-gold group-hover:text-dark transition-colors duration-300">
-                        <Icon className="w-4 h-4" />
-                      </span>
-                      <h3 className="font-serif text-xl text-dark">{service.title}</h3>
+                  <div className="flex-1 min-w-0 pt-1">
+                    {/* Title row */}
+                    <div className="flex items-center gap-2.5">
+                      <Icon
+                        className={`w-4 h-4 shrink-0 transition-colors duration-300 ${
+                          isActive ? 'text-gold' : 'text-warm-white/20'
+                        }`}
+                      />
+                      <h3
+                        className={`font-serif text-[1.15rem] transition-colors duration-300 ${
+                          isActive ? 'text-warm-white' : 'text-warm-white/45'
+                        }`}
+                      >
+                        {service.title}
+                      </h3>
                     </div>
-                    <p className="text-sm text-warm-gray leading-relaxed flex-1">
-                      {service.description}
-                    </p>
-                    <Link
-                      href={`/services#${service.id}`}
-                      className="mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-gold group-hover:text-gold-dark transition-colors"
-                    >
-                      Explore
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
-                    </Link>
-                  </div>
 
-                  {/* Gold bottom border grows on hover */}
-                  <div className="h-[2px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                    {/* Expandable description + link */}
+                    <AnimatePresence initial={false}>
+                      {isActive && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <p className="text-warm-white/42 text-sm leading-relaxed pt-2.5 pb-2 pr-6">
+                            {service.description}
+                          </p>
+                          <Link
+                            href={`/services#${service.id}`}
+                            className="group/lnk inline-flex items-center gap-1.5 text-gold text-[11px] font-semibold uppercase tracking-[0.2em] hover:text-gold-light transition-colors"
+                          >
+                            Explore
+                            <ArrowRight className="w-3 h-3 group-hover/lnk:translate-x-1 transition-transform duration-300" />
+                          </Link>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
-              </ScrollReveal>
+              </div>
             )
           })}
         </div>
 
-        <div className="text-center mt-12">
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-3 border-2 border-gold text-gold font-semibold px-8 py-3.5 tracking-wide hover:bg-gold hover:text-dark transition-colors duration-200"
-          >
-            View All Services
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+        {/* Right — cinematic video reveal panel */}
+        <div className="relative overflow-hidden">
+          {services.map((service, i) => (
+            <div
+              key={service.id}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                i === activeIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              {service.videoUrl ? (
+                // eslint-disable-next-line jsx-a11y/media-has-caption
+                <video
+                  src={service.videoUrl}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              ) : (
+                <Image
+                  src={service.heroImage}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  sizes="55vw"
+                />
+              )}
+              {/* Blend gradient from left */}
+              <div className="absolute inset-0 bg-gradient-to-r from-dark/55 via-dark/10 to-transparent" />
+              {/* Bottom gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
+              {/* Faint service name watermark */}
+              <p
+                aria-hidden="true"
+                className="absolute bottom-7 right-7 font-serif text-2xl text-warm-white/10 select-none text-right"
+              >
+                {service.title}
+              </p>
+            </div>
+          ))}
         </div>
+      </div>
+
+      {/* ── Tablet / Mobile: cinematic card grid ───────── */}
+      <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-px bg-warm-white/8">
+        {services.map((service, i) => {
+          const Icon = iconMap[service.icon] ?? Camera
+          return (
+            <ScrollReveal key={service.id} delay={i * 0.06}>
+              <Link
+                href={`/services#${service.id}`}
+                className="group relative flex overflow-hidden"
+                style={{ aspectRatio: '4 / 3' }}
+              >
+                {service.videoUrl ? (
+                  // eslint-disable-next-line jsx-a11y/media-has-caption
+                  <video
+                    src={service.videoUrl}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover opacity-65 group-hover:opacity-85 transition-opacity duration-700"
+                  />
+                ) : (
+                  <Image
+                    src={service.heroImage}
+                    alt={service.title}
+                    fill
+                    className="object-cover opacity-65 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700"
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/25 to-transparent" />
+
+                {/* Number */}
+                <span
+                  aria-hidden="true"
+                  className="absolute top-4 left-4 font-serif text-5xl font-bold leading-none text-warm-white/8 select-none"
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+
+                {/* Bottom text */}
+                <div className="absolute bottom-0 p-5">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <Icon className="w-4 h-4 text-gold shrink-0" />
+                    <h3 className="font-serif text-xl text-warm-white">{service.title}</h3>
+                  </div>
+                  <p className="text-warm-white/45 text-xs leading-relaxed line-clamp-2">
+                    {service.description}
+                  </p>
+                </div>
+
+                {/* Hover: gold bottom bar */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              </Link>
+            </ScrollReveal>
+          )
+        })}
+      </div>
+
+      {/* ── Footer CTA ─────────────────────────────────── */}
+      <div className="py-12 px-6 text-center border-t border-warm-white/8">
+        <Link
+          href="/services"
+          className="inline-flex items-center gap-3 border border-gold/55 text-gold font-semibold px-9 py-3.5 text-sm tracking-[0.12em] uppercase hover:bg-gold hover:text-dark hover:border-gold transition-all duration-300"
+        >
+          View All Services
+          <ArrowRight className="w-4 h-4" />
+        </Link>
       </div>
     </section>
   )
