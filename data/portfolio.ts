@@ -34,6 +34,7 @@ export const portfolioStories: WeddingStory[] = [
       },
     ],
     filmStripImage: W('5'),
+    videoUrl: '/136133-764371501_medium.mp4',
     photos: [
       photo(W('6'), 'Bride and groom at The Leela Palace'),
       photo(W('7'), 'Wedding ceremony at Lake Pichola'),
@@ -69,6 +70,7 @@ export const portfolioStories: WeddingStory[] = [
         quoteAuthor: 'Vikram Nair',
       },
     ],
+    videoUrl: '/157657-815175893_medium.mp4',
     photos: [
       photo(W('13'), 'Couple at Jai Mahal Palace Jaipur'),
       photo(W('14'), 'Bridal portrait in pink city'),
@@ -102,6 +104,7 @@ export const portfolioStories: WeddingStory[] = [
         quoteAuthor: 'Arjun Pillai',
       },
     ],
+    videoUrl: '/14299460-hd_1920_1080_25fps.mp4',
     photos: [
       photo(W('21'), 'Beach wedding at Taj Exotica Goa'),
     ],
@@ -128,6 +131,7 @@ export const portfolioStories: WeddingStory[] = [
         quoteAuthor: 'Kavya Desai',
       },
     ],
+    videoUrl: '/14249219_1920_1080_100fps.mp4',
     photos: [
       photo(W('4'), 'Pre-wedding at Laxmi Vilas Palace'),
       photo(W('5'), 'Couple in palace gardens'),
@@ -155,6 +159,7 @@ export const portfolioStories: WeddingStory[] = [
         quoteAuthor: 'Riya Joshi',
       },
     ],
+    videoUrl: '/16024728_1920_1080_25fps.mp4',
     photos: [
       photo(W('8'), 'Aerial view of Umaid Bhawan Palace'),
       photo(W('9'), 'Drone shot of baraat procession'),
@@ -182,6 +187,7 @@ export const portfolioStories: WeddingStory[] = [
         quoteAuthor: 'Nisha Agarwal',
       },
     ],
+    videoUrl: '/8751561-uhd_4096_2160_24fps.mp4',
     photos: [
       photo(W('16'), 'Cinematic still from wedding film'),
       photo(W('18'), 'Film grade wedding portrait'),

@@ -40,6 +40,7 @@ export interface WeddingStory {
   tags?: string[]
   storySections?: StorySection[]
   filmStripImage?: string
+  videoUrl?: string
 }
 
 export interface Testimonial {

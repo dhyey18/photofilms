@@ -6,6 +6,7 @@ import { ArrowLeft, Star } from 'lucide-react'
 import { portfolioStories } from '@/data/portfolio'
 import type { StorySection } from '@/types'
 import StoryGallery from '@/components/portfolio/StoryGallery'
+import StoryVideo from '@/components/portfolio/StoryVideo'
 import CTABanner from '@/components/home/CTABanner'
 
 interface Props {
@@ -193,6 +194,14 @@ export default async function StoryPage({ params }: Props) {
       {story.storySections?.map((section, i) => (
         <EditorialSection key={i} section={section} reversed={i % 2 === 1} />
       ))}
+
+      {/* ── Cinematic video ───────────────────────────────── */}
+      {story.videoUrl && (
+        <StoryVideo
+          src={story.videoUrl}
+          coupleNames={story.couple}
+        />
+      )}
 
       {/* ── Film strip image ───────────────────────────────── */}
       {story.filmStripImage && (
