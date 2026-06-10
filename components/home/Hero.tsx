@@ -66,6 +66,7 @@ export default function Hero() {
           muted
           loop
           playsInline
+          preload="none"
           aria-hidden="true"
           onCanPlay={() => setVideoReady(true)}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1400ms] ${

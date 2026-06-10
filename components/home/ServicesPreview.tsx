@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Camera, Heart, Film, Plane, Briefcase, User, ArrowRight } from 'lucide-react'
@@ -14,6 +14,19 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function ServicesPreview() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
+
+  /* Only play the active video — all others stay paused */
+  useEffect(() => {
+    videoRefs.current.forEach((vid, i) => {
+      if (!vid) return
+      if (i === activeIndex) {
+        vid.play().catch(() => {})
+      } else {
+        vid.pause()
+      }
+    })
+  }, [activeIndex])
 
   return (
     <section className="bg-dark overflow-hidden">
@@ -129,11 +142,12 @@ export default function ServicesPreview() {
               {service.videoUrl ? (
                 // eslint-disable-next-line jsx-a11y/media-has-caption
                 <video
+                  ref={(el) => { videoRefs.current[i] = el }}
                   src={service.videoUrl}
-                  autoPlay
                   muted
                   loop
                   playsInline
+                  preload="none"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               ) : (
@@ -172,25 +186,13 @@ export default function ServicesPreview() {
                 className="group relative flex overflow-hidden"
                 style={{ aspectRatio: '4 / 3' }}
               >
-                {service.videoUrl ? (
-                  // eslint-disable-next-line jsx-a11y/media-has-caption
-                  <video
-                    src={service.videoUrl}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover opacity-65 group-hover:opacity-85 transition-opacity duration-700"
-                  />
-                ) : (
-                  <Image
-                    src={service.heroImage}
-                    alt={service.title}
-                    fill
-                    className="object-cover opacity-65 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
-                )}
+                <Image
+                  src={service.heroImage}
+                  alt={service.title}
+                  fill
+                  className="object-cover opacity-65 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700"
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/25 to-transparent" />
 
                 {/* Number */}
