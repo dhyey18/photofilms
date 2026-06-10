@@ -39,38 +39,16 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
 
 export default function SocialProof() {
   return (
-    <section className="bg-dark py-20 px-6 relative overflow-hidden">
-      {/* Subtle radial glow */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 70%)',
-        }}
-      />
-
-      <div className="relative max-w-5xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          {stats.map((stat, i) => (
-            <div
-              key={stat.label}
-              className={`text-center px-6 py-8 transition-all duration-300 hover:bg-warm-white/[0.03] cursor-default ${
-                i < 3 ? 'md:border-r md:border-warm-white/10' : ''
-              } ${i >= 2 ? 'border-t md:border-t-0 border-warm-white/10' : ''}`}
-            >
-              {/* Gold overline */}
-              <div className="w-8 h-px bg-gold mx-auto mb-5" />
-
-              <Counter target={stat.target} suffix={stat.suffix} />
-
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white/80">
-                {stat.label}
-              </p>
-              <p className="mt-1 text-xs text-warm-white/35">{stat.desc}</p>
-            </div>
-          ))}
-        </div>
+    <section className="bg-white border-y border-dark/[0.06] py-20 px-6">
+      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-dark/[0.06]">
+        {stats.map((stat) => (
+          <div key={stat.label} className="bg-white text-center px-6 py-10 cursor-default hover:bg-[#faf8f5] transition-colors duration-300">
+            <div className="w-8 h-px bg-gold/55 mx-auto mb-5" />
+            <Counter target={stat.target} suffix={stat.suffix} />
+            <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-dark/65">{stat.label}</p>
+            <p className="mt-1 text-xs text-dark/32">{stat.desc}</p>
+          </div>
+        ))}
       </div>
     </section>
   )

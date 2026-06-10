@@ -29,20 +29,20 @@ export default function ServicesPreview() {
   }, [activeIndex])
 
   return (
-    <section className="bg-dark overflow-hidden">
+    <section className="bg-[#faf8f5] overflow-hidden">
 
       {/* ── Section header ─────────────────────────────── */}
-      <div className="py-20 px-6 text-center border-b border-warm-white/8">
+      <div className="py-20 px-6 text-center border-b border-dark/[0.06]">
         <ScrollReveal>
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold mb-2">
             What We Offer
           </p>
           <span className="block h-px w-10 bg-gold/50 mx-auto mb-7" />
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] text-warm-white leading-[1.1]">
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] text-dark leading-[1.1]">
             Services crafted for{' '}
-            <em className="not-italic text-gold-light">your love story</em>
+            <em className="not-italic text-gold">your love story</em>
           </h2>
-          <p className="mt-5 text-warm-white/50 text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="mt-5 text-dark/50 text-lg max-w-xl mx-auto leading-relaxed">
             From intimate portraits to grand cinematic productions, every service is
             tailored to your unique celebration.
           </p>
@@ -53,7 +53,7 @@ export default function ServicesPreview() {
       <div className="hidden lg:grid lg:grid-cols-[1fr_1.3fr]" style={{ minHeight: 580 }}>
 
         {/* Left — numbered service list */}
-        <div className="border-r border-warm-white/8 flex flex-col">
+        <div className="border-r border-dark/[0.06] flex flex-col">
           {services.map((service, i) => {
             const Icon = iconMap[service.icon] ?? Camera
             const isActive = i === activeIndex
@@ -61,8 +61,8 @@ export default function ServicesPreview() {
               <div
                 key={service.id}
                 onMouseEnter={() => setActiveIndex(i)}
-                className={`relative flex-1 border-b border-warm-white/8 last:border-b-0 cursor-default transition-colors duration-300 ${
-                  isActive ? 'bg-warm-white/[0.04]' : 'hover:bg-warm-white/[0.025]'
+                className={`relative flex-1 border-b border-dark/[0.06] last:border-b-0 cursor-default transition-colors duration-300 ${
+                  isActive ? 'bg-dark/[0.03]' : 'hover:bg-dark/[0.025]'
                 }`}
               >
                 {/* Active accent bar */}
@@ -77,7 +77,7 @@ export default function ServicesPreview() {
                   {/* Number */}
                   <span
                     className={`font-serif text-[2.6rem] font-bold leading-none shrink-0 select-none transition-colors duration-500 ${
-                      isActive ? 'text-gold' : 'text-warm-white/10'
+                      isActive ? 'text-gold' : 'text-dark/10'
                     }`}
                   >
                     {String(i + 1).padStart(2, '0')}
@@ -88,12 +88,12 @@ export default function ServicesPreview() {
                     <div className="flex items-center gap-2.5">
                       <Icon
                         className={`w-4 h-4 shrink-0 transition-colors duration-300 ${
-                          isActive ? 'text-gold' : 'text-warm-white/20'
+                          isActive ? 'text-gold' : 'text-dark/20'
                         }`}
                       />
                       <h3
                         className={`font-serif text-[1.15rem] transition-colors duration-300 ${
-                          isActive ? 'text-warm-white' : 'text-warm-white/45'
+                          isActive ? 'text-dark' : 'text-dark/45'
                         }`}
                       >
                         {service.title}
@@ -110,7 +110,7 @@ export default function ServicesPreview() {
                           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                           className="overflow-hidden"
                         >
-                          <p className="text-warm-white/42 text-sm leading-relaxed pt-2.5 pb-2 pr-6">
+                          <p className="text-dark/45 text-sm leading-relaxed pt-2.5 pb-2 pr-6">
                             {service.description}
                           </p>
                           <Link
@@ -160,7 +160,7 @@ export default function ServicesPreview() {
                 />
               )}
               {/* Blend gradient from left */}
-              <div className="absolute inset-0 bg-gradient-to-r from-dark/55 via-dark/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#faf8f5]/60 via-[#faf8f5]/10 to-transparent" />
               {/* Bottom gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
               {/* Faint service name watermark */}
@@ -176,7 +176,7 @@ export default function ServicesPreview() {
       </div>
 
       {/* ── Tablet / Mobile: cinematic card grid ───────── */}
-      <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-px bg-warm-white/8">
+      <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-px bg-dark/[0.06]">
         {services.map((service, i) => {
           const Icon = iconMap[service.icon] ?? Camera
           return (
@@ -223,10 +223,10 @@ export default function ServicesPreview() {
       </div>
 
       {/* ── Footer CTA ─────────────────────────────────── */}
-      <div className="py-12 px-6 text-center border-t border-warm-white/8">
+      <div className="py-12 px-6 text-center border-t border-dark/[0.06]">
         <Link
           href="/services"
-          className="inline-flex items-center gap-3 border border-gold/55 text-gold font-semibold px-9 py-3.5 text-sm tracking-[0.12em] uppercase hover:bg-gold hover:text-dark hover:border-gold transition-all duration-300"
+          className="inline-flex items-center gap-3 border border-dark/25 text-dark font-semibold px-9 py-3.5 text-sm tracking-[0.12em] uppercase hover:bg-dark hover:text-warm-white hover:border-dark transition-all duration-300"
         >
           View All Services
           <ArrowRight className="w-4 h-4" />
