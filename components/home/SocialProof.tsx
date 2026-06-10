@@ -55,7 +55,7 @@ export default function SocialProof() {
           {stats.map((stat, i) => (
             <div
               key={stat.label}
-              className={`text-center px-6 py-6 ${
+              className={`text-center px-6 py-8 transition-all duration-300 hover:bg-warm-white/[0.03] cursor-default ${
                 i < 3 ? 'md:border-r md:border-warm-white/10' : ''
               } ${i >= 2 ? 'border-t md:border-t-0 border-warm-white/10' : ''}`}
             >

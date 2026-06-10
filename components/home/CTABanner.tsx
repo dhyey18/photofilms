@@ -12,7 +12,7 @@ export default function CTABanner() {
   const waHref = `https://wa.me/${number}?text=${waMessage}`
 
   return (
-    <section className="relative py-28 px-6 overflow-hidden">
+    <section className="grain relative py-28 px-6 overflow-hidden">
       {/* Static image — visible while video loads */}
       <Image
         src="https://photofilms.in/images/slider/09.webp"
@@ -32,7 +32,7 @@ export default function CTABanner() {
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-dark/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-dark/65 via-dark/72 to-dark/80" />
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <p className="text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-4">
           Limited Dates Available

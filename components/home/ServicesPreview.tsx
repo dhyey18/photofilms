@@ -28,7 +28,7 @@ export default function ServicesPreview() {
             const num = String(i + 1).padStart(2, '0')
             return (
               <ScrollReveal key={service.id} delay={i * 0.08}>
-                <div className="group bg-warm-white border border-border hover:border-gold/50 transition-all duration-500 overflow-hidden flex flex-col h-full">
+                <div className="group bg-warm-white border border-border hover:border-gold/50 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(201,168,76,0.14)] transition-all duration-500 overflow-hidden flex flex-col h-full">
                   {/* Image */}
                   <div className="relative h-60 overflow-hidden">
                     <Image

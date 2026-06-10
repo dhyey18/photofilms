@@ -16,16 +16,22 @@ export default function SectionHeader({
   return (
     <div className={`mb-12 ${centered ? 'text-center' : ''}`}>
       {eyebrow && (
-        <p
-          className={`text-xs font-semibold uppercase tracking-[0.2em] mb-3 ${
-            light ? 'text-gold-light' : 'text-gold'
-          }`}
-        >
-          {eyebrow}
-        </p>
+        <div className={`mb-5 ${centered ? 'flex flex-col items-center' : 'inline-flex flex-col'}`}>
+          <p
+            className={`text-[11px] font-semibold uppercase tracking-[0.28em] ${
+              light ? 'text-gold-light' : 'text-gold'
+            }`}
+          >
+            {eyebrow}
+          </p>
+          {/* Decorative rule — grows left-to-right for a reveal feel */}
+          <span
+            className={`mt-2 block h-px w-10 ${light ? 'bg-gold-light/50' : 'bg-gold/50'}`}
+          />
+        </div>
       )}
       <h2
-        className={`font-serif text-4xl md:text-5xl leading-tight ${
+        className={`font-serif text-4xl md:text-5xl leading-[1.12] ${
           light ? 'text-warm-white' : 'text-dark'
         }`}
       >
@@ -35,7 +41,7 @@ export default function SectionHeader({
         <p
           className={`mt-4 text-lg leading-relaxed max-w-2xl ${
             centered ? 'mx-auto' : ''
-          } ${light ? 'text-gold-light/80' : 'text-warm-gray'}`}
+          } ${light ? 'text-warm-white/65' : 'text-warm-gray'}`}
         >
           {subtitle}
         </p>

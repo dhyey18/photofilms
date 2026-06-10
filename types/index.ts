@@ -19,17 +19,27 @@ export interface Photo {
 
 export type StoryCategory = 'Wedding' | 'Pre-Wedding' | 'Drone' | 'Film'
 
+export interface StorySection {
+  image: string
+  quote: string
+  quoteAuthor: string
+}
+
 export interface WeddingStory {
   slug: string
   couple: string
   venue: string
   city: string
+  location?: string
   date: string
   category: StoryCategory
   coverImage: string
   photos: Photo[]
   narrative: string
   services: string[]
+  tags?: string[]
+  storySections?: StorySection[]
+  filmStripImage?: string
 }
 
 export interface Testimonial {

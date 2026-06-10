@@ -39,7 +39,7 @@ export default function PortfolioPreview() {
                       src={story.coverImage}
                       alt={`${story.couple} wedding at ${story.venue}`}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover group-hover:scale-105 transition-all duration-700 grayscale-[30%] group-hover:grayscale-0"
                       sizes={
                         isFeatured
                           ? '(max-width: 768px) 100vw, 66vw'

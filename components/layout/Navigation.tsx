@@ -59,22 +59,28 @@ export default function Navigation() {
 
         {/* Desktop nav */}
         <ul className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={`text-sm font-medium tracking-wide transition-colors duration-200 ${
-                  pathname === link.href
-                    ? 'text-gold'
-                    : scrolled || !isHome
-                    ? 'text-dark-muted hover:text-dark'
-                    : 'text-warm-white/80 hover:text-warm-white'
-                }`}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`
+                    relative inline-block text-sm font-medium tracking-wide transition-colors duration-200 pb-0.5
+                    after:absolute after:bottom-0 after:left-0 after:h-px after:transition-all after:duration-300
+                    ${isActive
+                      ? 'text-gold after:w-full after:bg-gold'
+                      : scrolled || !isHome
+                      ? 'text-dark-muted hover:text-dark after:w-0 after:bg-dark hover:after:w-full'
+                      : 'text-warm-white/80 hover:text-warm-white after:w-0 after:bg-warm-white hover:after:w-full'
+                    }
+                  `}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            )
+          })}
         </ul>
 
         {/* Desktop CTA */}

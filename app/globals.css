@@ -59,3 +59,49 @@ body {
   mix-blend-mode: overlay;
   z-index: 1;
 }
+
+/* ─── Custom scrollbar ─────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.35); }
+::-webkit-scrollbar-thumb:hover { background: #C9A84C; }
+
+/* ─── Text selection ───────────────────────────────── */
+::selection {
+  background: rgba(201,168,76,0.22);
+  color: #1C1A18;
+}
+
+/* ─── Gold shimmer text ────────────────────────────── */
+@keyframes text-shimmer {
+  0%   { background-position: -300% center; }
+  100% { background-position: 300% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #C9A84C 0%, #E8D5A3 35%, #C9A84C 65%, #9A7B2A 100%);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer 4s linear infinite;
+}
+
+/* ─── Underline grow (nav hover) ───────────────────── */
+.underline-grow {
+  position: relative;
+}
+.underline-grow::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #C9A84C;
+  transition: width 0.3s ease;
+}
+.underline-grow:hover::after,
+.underline-grow.active::after {
+  width: 100%;
+}
