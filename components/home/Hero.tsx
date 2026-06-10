@@ -120,7 +120,7 @@ export default function Hero() {
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
 
         {/* Eyebrow with flanking gold lines */}
-        <motion.p
+        {/* <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -129,10 +129,10 @@ export default function Hero() {
           <span aria-hidden="true" className="w-8 h-px bg-gold/55 flex-shrink-0" />
           Vadodara & Gujarat · Since 2012
           <span aria-hidden="true" className="w-8 h-px bg-gold/55 flex-shrink-0" />
-        </motion.p>
+        </motion.p> */}
 
         {/* Heading — each word slides in with staggered delay */}
-        <h1 className="font-serif text-5xl md:text-7xl lg:text-[82px] text-warm-white leading-[1.08] tracking-tight">
+        {/* <h1 className="font-serif text-5xl md:text-7xl lg:text-[82px] text-warm-white leading-[1.08] tracking-tight">
           {headingParts.map((part, i) => (
             <motion.span
               key={part.text}
@@ -148,10 +148,10 @@ export default function Hero() {
               {part.text}
             </motion.span>
           ))}
-        </h1>
+        </h1> */}
 
         {/* Subtitle */}
-        <motion.p
+        {/* <motion.p
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.05, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -159,10 +159,10 @@ export default function Hero() {
         >
           Award-winning wedding photography, cinematic films, and drone aerial
           coverage — crafted with artistic vision and heartfelt dedication.
-        </motion.p>
+        </motion.p> */}
 
         {/* CTA row */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.25, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -183,7 +183,7 @@ export default function Hero() {
             <MessageCircle className="w-4 h-4 shrink-0" />
             WhatsApp Inquiry
           </a>
-        </motion.div>
+        </motion.div> */}
       </div>
 
       {/* ── Slide dots (visible only when image slider is active) ── */}
