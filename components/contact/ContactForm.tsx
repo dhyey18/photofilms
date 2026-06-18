@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Send, CheckCircle } from 'lucide-react'
+import { Send, CheckCircle, AlertCircle } from 'lucide-react'
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -21,6 +21,7 @@ type FormData = z.infer<typeof schema>
 
 export default function ContactForm({ defaultService }: { defaultService?: string }) {
   const [submitted, setSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const {
     register,
@@ -35,8 +36,16 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
   })
 
   const onSubmit = async (data: FormData) => {
-    await new Promise((r) => setTimeout(r, 1000))
-    console.log('Form submission:', data)
+    setSubmitError(null)
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    if (!res.ok) {
+      setSubmitError('Something went wrong. Please try WhatsApp or email us directly.')
+      return
+    }
     setSubmitted(true)
     reset()
   }
@@ -143,6 +152,13 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
         />
         {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>}
       </div>
+
+      {submitError && (
+        <div className="flex items-start gap-2 text-red-600 text-sm bg-red-50 border border-red-200 px-4 py-3">
+          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+          {submitError}
+        </div>
+      )}
 
       <button
         type="submit"
