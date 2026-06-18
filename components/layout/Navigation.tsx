@@ -1,10 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+
+const LOGO_SRC = 'https://photofilms.in/images/logolight-photofilms.svg'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -12,7 +15,7 @@ const navLinks = [
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/about', label: 'About' },
-  { href: '/pricing', label: 'Pricing' },
+  // { href: '/pricing', label: 'Pricing' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ]
@@ -49,13 +52,17 @@ export default function Navigation() {
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link
-          href="/"
-          className={`font-serif text-2xl font-bold tracking-tight transition-colors ${
-            scrolled || menuOpen || !isHome ? 'text-dark' : 'text-warm-white'
-          }`}
-        >
-          photo<span className="text-gold">films</span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src={LOGO_SRC}
+            alt="Photofilms"
+            width={160}
+            height={40}
+            className={`h-9 w-auto transition-all duration-300 ${
+              scrolled || menuOpen || !isHome ? 'brightness-0' : 'brightness-100'
+            }`}
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}
