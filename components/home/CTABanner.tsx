@@ -1,53 +1,73 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { Dancing_Script } from 'next/font/google'
 import { MessageCircle } from 'lucide-react'
+
+const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 'swap' })
 
 const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '918866008868'
 const waMessage = encodeURIComponent("Hi! I'd like to inquire about booking Photofilms for my wedding.")
-
-const BG_VIDEO =
-  'https://videos.pexels.com/video-files/35300398/14956176_1920_1080_50fps.mp4'
 
 export default function CTABanner() {
   const waHref = `https://wa.me/${number}?text=${waMessage}`
 
   return (
-    <section className="grain relative py-28 px-6 overflow-hidden">
-      {/* Static image — visible while video loads */}
+    <section className="relative overflow-hidden" style={{ minHeight: 560 }}>
+
+      {/* Background photo */}
       <Image
         src="https://photofilms.in/images/slider/09.webp"
         alt=""
         fill
-        aria-hidden="true"
+        aria-hidden
         className="object-cover"
         sizes="100vw"
       />
-      {/* Looping cinematic background video */}
-      <video
-        src={BG_VIDEO}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="none"
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover"
+      {/* Cream-warm overlay (matches light theme, not full black) */}
+      <div className="absolute inset-0 bg-[#faf8f5]/82" />
+      {/* Soft vignette */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 90% 70% at 50% 50%, transparent 30%, rgba(26,22,20,0.08) 100%)' }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-dark/65 via-dark/72 to-dark/80" />
-      <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <p className="text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-4">
-          Limited Dates Available
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24 min-h-[560px]">
+
+        {/* Eyebrow */}
+        <div className="flex items-center gap-3 mb-6">
+          <span className="w-10 h-px bg-gold/50" />
+          <p className="text-[10px] font-semibold uppercase tracking-[0.36em] text-gold">
+            Limited Dates Available
+          </p>
+          <span className="w-10 h-px bg-gold/50" />
+        </div>
+
+        {/* Script sub-heading */}
+        <p className={`${script.className} text-3xl md:text-4xl text-dark/55 mb-3`}>
+          Let&apos;s begin your
         </p>
-        <h2 className="font-serif text-4xl md:text-5xl text-warm-white leading-tight">
-          Ready to begin your love story?
+
+        {/* Main serif heading */}
+        <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.6rem] text-dark leading-tight max-w-2xl">
+          Love <em className="italic text-gold">Story</em>
         </h2>
-        <p className="mt-5 text-lg text-warm-white/70 leading-relaxed">
-          Book a free consultation and let&apos;s talk about your wedding vision. We hold your date with a simple deposit.
+
+        {/* Body */}
+        <p className="mt-6 text-dark/50 text-base md:text-lg max-w-md mx-auto leading-relaxed">
+          Book a free consultation and let&apos;s talk about your wedding vision.
+          We hold your date with a simple deposit.
         </p>
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+
+        {/* Thin divider */}
+        <div className="w-12 h-px bg-dark/15 my-8" />
+
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row items-center gap-4">
           <Link
             href="/contact"
-            className="bg-gold text-dark font-semibold px-8 py-4 text-base tracking-wide hover:bg-gold-dark transition-colors duration-200"
+            className="bg-dark text-warm-white font-semibold px-9 py-4 text-[11px] tracking-[0.22em] uppercase hover:bg-gold hover:text-dark transition-all duration-300"
           >
             Check Availability
           </Link>
@@ -55,12 +75,21 @@ export default function CTABanner() {
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 border-2 border-warm-white/50 text-warm-white font-semibold px-8 py-4 text-base tracking-wide hover:bg-warm-white/10 transition-colors duration-200"
+            className="inline-flex items-center gap-2.5 border border-dark/25 text-dark/65 font-semibold px-9 py-4 text-[11px] tracking-[0.22em] uppercase hover:border-dark hover:text-dark transition-all duration-300"
           >
-            <MessageCircle className="w-5 h-5" />
+            <MessageCircle className="w-4 h-4" />
             WhatsApp Us
           </a>
         </div>
+
+        {/* Watermark */}
+        <span
+          aria-hidden
+          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none font-serif font-bold leading-none"
+          style={{ fontSize: 'clamp(70px, 16vw, 220px)', color: 'rgba(26,22,20,0.025)' }}
+        >
+          PHOTOFILMS
+        </span>
       </div>
     </section>
   )
