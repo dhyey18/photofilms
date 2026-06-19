@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ChevronLeft, ChevronRight, MapPin } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
 type Photo = {
   src: string
@@ -120,14 +120,7 @@ export default function PortfolioGallery({
                   loading={i < 16 ? 'eager' : 'lazy'}
                 />
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-colors duration-400" />
-                <div className="absolute inset-0 flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="font-serif text-warm-white text-sm leading-tight">{p.couple}</p>
-                  <p className="flex items-center gap-1 text-warm-white/60 text-[10px] mt-0.5">
-                    <MapPin className="w-2.5 h-2.5 shrink-0" />
-                    {p.venue}, {p.city}
-                  </p>
-                </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-500" />
               </button>
             ))}
           </div>
@@ -183,14 +176,6 @@ export default function PortfolioGallery({
               </motion.div>
             </AnimatePresence>
 
-            {/* Caption */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center pointer-events-none">
-              <p className="font-serif text-warm-white text-base">{photos[lightbox].couple}</p>
-              <p className="flex items-center justify-center gap-1 text-warm-white/45 text-xs mt-1">
-                <MapPin className="w-3 h-3 shrink-0" />
-                {photos[lightbox].venue}, {photos[lightbox].city}
-              </p>
-            </div>
 
             {/* Prev / Next */}
             <button

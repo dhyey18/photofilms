@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { Award, Camera, Heart, Globe } from 'lucide-react'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import CTABanner from '@/components/home/CTABanner'
+import SocialProof from '@/components/home/SocialProof'
+import FAQAccordion from '@/components/home/FAQAccordion'
 
 export const metadata: Metadata = {
   title: 'About — Our Story & Philosophy',
@@ -155,6 +157,8 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <SocialProof />
+
       {/* ── Behind the lens ─────────────────────────────── */}
       <section className="bg-[#faf8f5] py-24 px-6">
         <div className="max-w-7xl mx-auto">
@@ -193,6 +197,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <FAQAccordion showAll />
       <CTABanner />
     </>
   )

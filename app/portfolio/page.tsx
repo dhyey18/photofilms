@@ -47,7 +47,7 @@ export default function PortfolioPage() {
               Every frame is a feeling. Every story is a life chapter.
             </p>
             <div className="flex items-center justify-center flex-wrap gap-x-8 gap-y-3 mt-10">
-              {[`${totalPhotos} Photographs`, `${portfolioStories.length} Stories`, 'Across India'].map((s, i) => (
+              {[`${totalPhotos} Photographs`, 'Across India'].map((s, i) => (
                 <span key={s} className="flex items-center gap-8">
                   {i > 0 && <span className="w-1 h-1 rounded-full bg-dark/20" />}
                   <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/30">{s}</span>
