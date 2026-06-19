@@ -11,7 +11,7 @@ const LOGO_SRC = 'https://photofilms.in/images/logolight-photofilms.svg'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/portfolio', label: 'Gallery' },
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/about', label: 'About' },
   { href: '/blog', label: 'Blog' },

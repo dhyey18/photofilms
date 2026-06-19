@@ -19,8 +19,7 @@ export default function FounderMessage() {
           >
             Story
           </span>
-          , we tell it.{' '}
-          <span className="italic text-dark/40">"</span>
+          <span className="whitespace-nowrap">, we tell it.{' '}<span className="italic text-dark/40">"</span></span>
         </h2>
       </ScrollReveal>
 
