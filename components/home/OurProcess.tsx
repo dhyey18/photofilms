@@ -41,10 +41,10 @@ export default function OurProcess() {
             <h2 className={`${script.className} text-4xl md:text-5xl text-dark/60 mb-4`}>
               The Journey
             </h2>
-            <p className="font-serif text-3xl md:text-4xl text-dark leading-tight">
+            {/* <p className="font-serif text-3xl md:text-4xl text-dark leading-tight">
               How we work{' '}
               <em className="italic text-gold">together</em>
-            </p>
+            </p> */}
             <p className="mt-5 text-dark/45 text-base max-w-md mx-auto leading-relaxed">
               From your first message to your final gallery — a process designed around your peace of mind.
             </p>
