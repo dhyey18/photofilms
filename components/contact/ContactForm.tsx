@@ -9,37 +9,74 @@ import { Dancing_Script } from 'next/font/google'
 
 const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 'swap' })
 
+const SERVICES = [
+  'Wedding Photography',
+  'Cinematography / Film',
+  'Pre-Wedding Shoot',
+  'Drone Coverage',
+] as const
+
+const FUNCTIONS = ['Mehendi', 'Sangeet', 'Wedding Ceremony', 'Reception'] as const
+
+const GUEST_RANGES = ['Under 100', '100–300', '300–600', '600–1000', '1000+'] as const
+
 const schema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
+  brideName: z.string().min(2, "Please enter the bride's name"),
+  groomName: z.string().min(2, "Please enter the groom's name"),
   email: z.string().email('Please enter a valid email address'),
-  phone: z
-    .string()
-    .regex(/^[6-9]\d{9}$/, 'Please enter a valid 10-digit Indian mobile number'),
-  eventDate: z.string().optional(),
-  eventType: z.enum(['Wedding', 'Pre-Wedding', 'Cinematography', 'Drone', 'Corporate', 'Portrait']),
-  message: z.string().min(20, 'Please tell us a bit more (at least 20 characters)'),
+  phone: z.string().regex(/^[6-9]\d{9}$/, 'Please enter a valid 10-digit Indian mobile number'),
+  weddingDate: z.string().min(1, 'Please select your wedding date'),
+  venueCity: z.string().min(2, 'Please enter the city or venue'),
+  services: z.array(z.string()).min(1, 'Please select at least one service'),
+  functions: z.array(z.string()).optional(),
+  guestCount: z.string().optional(),
+  message: z.string().optional(),
 })
 
 type FormData = z.infer<typeof schema>
 
-const fieldClass =
+const inputClass =
   'w-full border border-dark/[0.1] bg-[#faf8f5] px-4 py-3 text-sm text-dark placeholder-dark/25 focus:outline-none focus:border-gold transition-colors duration-200'
+
+const labelClass = 'block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2'
 
 export default function ContactForm({ defaultService }: { defaultService?: string }) {
   const [submitted, setSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [selectedServices, setSelectedServices] = useState<string[]>(
+    defaultService ? [defaultService] : [],
+  )
+  const [selectedFunctions, setSelectedFunctions] = useState<string[]>([])
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      eventType: (defaultService as FormData['eventType']) ?? 'Wedding',
+      services: defaultService ? [defaultService] : [],
+      functions: [],
     },
   })
+
+  const toggleService = (s: string) => {
+    const next = selectedServices.includes(s)
+      ? selectedServices.filter((x) => x !== s)
+      : [...selectedServices, s]
+    setSelectedServices(next)
+    setValue('services', next, { shouldValidate: true })
+  }
+
+  const toggleFunction = (f: string) => {
+    const next = selectedFunctions.includes(f)
+      ? selectedFunctions.filter((x) => x !== f)
+      : [...selectedFunctions, f]
+    setSelectedFunctions(next)
+    setValue('functions', next)
+  }
 
   const onSubmit = async (data: FormData) => {
     setSubmitError(null)
@@ -54,6 +91,8 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
     }
     setSubmitted(true)
     reset()
+    setSelectedServices([])
+    setSelectedFunctions([])
   }
 
   if (submitted) {
@@ -78,85 +117,144 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+
+      {/* Couple names */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
-            Full Name *
-          </label>
+          <label className={labelClass}>Bride&apos;s Name *</label>
           <input
-            {...register('name')}
+            {...register('brideName')}
             type="text"
-            placeholder="Priya Sharma"
-            className={fieldClass}
+            placeholder="Priya"
+            className={inputClass}
           />
-          {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
+          {errors.brideName && <p className="mt-1 text-xs text-red-500">{errors.brideName.message}</p>}
         </div>
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
-            Email *
-          </label>
+          <label className={labelClass}>Groom&apos;s Name *</label>
+          <input
+            {...register('groomName')}
+            type="text"
+            placeholder="Arjun"
+            className={inputClass}
+          />
+          {errors.groomName && <p className="mt-1 text-xs text-red-500">{errors.groomName.message}</p>}
+        </div>
+      </div>
+
+      {/* Contact */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label className={labelClass}>Email *</label>
           <input
             {...register('email')}
             type="email"
             placeholder="priya@example.com"
-            className={fieldClass}
+            className={inputClass}
           />
           {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
         </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
-            Phone Number *
-          </label>
+          <label className={labelClass}>Phone *</label>
           <input
             {...register('phone')}
             type="tel"
             placeholder="9876543210"
-            className={fieldClass}
+            className={inputClass}
           />
           {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone.message}</p>}
         </div>
+      </div>
+
+      {/* Date + City */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
-            Event Date
-          </label>
+          <label className={labelClass}>Wedding Date *</label>
+          <input {...register('weddingDate')} type="date" className={inputClass} />
+          {errors.weddingDate && <p className="mt-1 text-xs text-red-500">{errors.weddingDate.message}</p>}
+        </div>
+        <div>
+          <label className={labelClass}>City / Venue *</label>
           <input
-            {...register('eventDate')}
-            type="date"
-            className={fieldClass}
+            {...register('venueCity')}
+            type="text"
+            placeholder="Vadodara, The Fern Hotel"
+            className={inputClass}
           />
+          {errors.venueCity && <p className="mt-1 text-xs text-red-500">{errors.venueCity.message}</p>}
         </div>
       </div>
 
+      {/* Services */}
       <div>
-        <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
-          Event Type *
-        </label>
-        <select {...register('eventType')} className={fieldClass}>
-          <option value="Wedding">Wedding Photography</option>
-          <option value="Pre-Wedding">Pre-Wedding Shoot</option>
-          <option value="Cinematography">Cinematography</option>
-          <option value="Drone">Drone Photography</option>
-          <option value="Corporate">Corporate / Event</option>
-          <option value="Portrait">Portrait / Headshots</option>
-        </select>
-        {errors.eventType && <p className="mt-1 text-xs text-red-500">{errors.eventType.message}</p>}
+        <label className={labelClass}>Services Needed *</label>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {SERVICES.map((s) => {
+            const active = selectedServices.includes(s)
+            return (
+              <button
+                key={s}
+                type="button"
+                onClick={() => toggleService(s)}
+                className={`flex items-center gap-3 px-4 py-3 text-sm border text-left transition-all duration-200 ${
+                  active
+                    ? 'border-gold bg-[#c9a84c]/[0.07] text-dark'
+                    : 'border-dark/[0.1] bg-[#faf8f5] text-dark/45 hover:border-dark/25 hover:text-dark/70'
+                }`}
+              >
+                <span
+                  className={`shrink-0 w-3.5 h-3.5 border transition-colors ${
+                    active ? 'border-gold bg-gold' : 'border-dark/25'
+                  }`}
+                />
+                {s}
+              </button>
+            )
+          })}
+        </div>
+        {errors.services && <p className="mt-1.5 text-xs text-red-500">{errors.services.message}</p>}
       </div>
 
+      {/* Functions */}
       <div>
-        <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
-          Your Message *
-        </label>
+        <label className={labelClass}>Functions to Cover</label>
+        <div className="grid grid-cols-2 gap-2">
+          {FUNCTIONS.map((f) => {
+            const active = selectedFunctions.includes(f)
+            return (
+              <button
+                key={f}
+                type="button"
+                onClick={() => toggleFunction(f)}
+                className={`flex items-center gap-3 px-4 py-3 text-sm border text-left transition-all duration-200 ${
+                  active
+                    ? 'border-gold bg-[#c9a84c]/[0.07] text-dark'
+                    : 'border-dark/[0.1] bg-[#faf8f5] text-dark/45 hover:border-dark/25 hover:text-dark/70'
+                }`}
+              >
+                <span
+                  className={`shrink-0 w-3.5 h-3.5 border transition-colors ${
+                    active ? 'border-gold bg-gold' : 'border-dark/25'
+                  }`}
+                />
+                {f}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+
+      {/* Message */}
+      <div>
+        <label className={labelClass}>Your Vision / Notes</label>
         <textarea
           {...register('message')}
-          rows={5}
-          placeholder="Tell us about your wedding vision, venue, number of guests, or anything else you'd like us to know..."
-          className={`${fieldClass} resize-none`}
+          rows={4}
+          placeholder="Tell us about your dream wedding, any special moments you want captured, or anything else we should know…"
+          className={`${inputClass} resize-none`}
         />
-        {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>}
       </div>
 
       {submitError && (

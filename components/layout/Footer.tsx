@@ -81,7 +81,7 @@ export default function Footer() {
               {[
                 { icon: MapPin, text: 'Vadodara, Gujarat, India', href: undefined },
                 { icon: Phone,  text: '+91 88660 08868', href: 'tel:+918866008868' },
-                { icon: Mail,   text: 'hello@photofilms.in', href: 'mailto:hello@photofilms.in' },
+                { icon: Mail,   text: 'storiesbyphotofilms@gmail.com', href: 'mailto:storiesbyphotofilms@gmail.com' },
               ].map(({ icon: Icon, text, href }) => (
                 <li key={text} className="flex items-start gap-3 text-sm text-dark/45">
                   <Icon className="w-4 h-4 text-gold mt-0.5 shrink-0" />
