@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
+import { Dancing_Script } from 'next/font/google'
 import { portfolioStories } from '@/data/portfolio'
 import PortfolioGallery from '@/components/portfolio/PortfolioGallery'
 import CTABanner from '@/components/home/CTABanner'
 import ScrollReveal from '@/components/ui/ScrollReveal'
+
+const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'Portfolio — Wedding Stories',
@@ -34,14 +37,10 @@ export default function PortfolioPage() {
         </span>
         <div className="max-w-4xl mx-auto relative text-center">
           <ScrollReveal>
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <span className="w-10 h-px bg-gold/60" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-gold">Our Work</p>
-              <span className="w-10 h-px bg-gold/60" />
-            </div>
+            <p className={`${script.className} text-3xl md:text-4xl text-dark/55 mb-4`}>Our Work</p>
             <h1 className="font-serif text-5xl md:text-6xl lg:text-[4.5rem] text-dark leading-[1.06]">
               Wedding stories we&apos;ve had{' '}
-              <em className="not-italic text-gold">the honour to tell</em>
+              <em className="italic text-gold">the honour to tell</em>
             </h1>
             <p className="mt-6 text-dark/45 text-lg max-w-md mx-auto leading-relaxed">
               Every frame is a feeling. Every story is a life chapter.

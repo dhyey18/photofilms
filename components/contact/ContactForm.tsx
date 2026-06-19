@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { Dancing_Script } from 'next/font/google'
+
+const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 'swap' })
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -18,6 +21,9 @@ const schema = z.object({
 })
 
 type FormData = z.infer<typeof schema>
+
+const fieldClass =
+  'w-full border border-dark/[0.1] bg-[#faf8f5] px-4 py-3 text-sm text-dark placeholder-dark/25 focus:outline-none focus:border-gold transition-colors duration-200'
 
 export default function ContactForm({ defaultService }: { defaultService?: string }) {
   const [submitted, setSubmitted] = useState(false)
@@ -53,14 +59,17 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
   if (submitted) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
-        <CheckCircle className="w-12 h-12 text-gold" />
-        <h3 className="font-serif text-2xl text-dark">Thank you! We&apos;ll be in touch soon.</h3>
-        <p className="text-warm-gray text-sm">
+        <div className="w-14 h-14 border border-gold/40 flex items-center justify-center">
+          <CheckCircle className="w-7 h-7 text-gold" />
+        </div>
+        <p className={`${script.className} text-3xl text-dark/70`}>Thank you!</p>
+        <h3 className="font-serif text-xl text-dark">We&apos;ll be in touch soon.</h3>
+        <p className="text-dark/40 text-sm max-w-xs leading-relaxed">
           We typically respond within 24 hours. For urgent enquiries, please WhatsApp us directly.
         </p>
         <button
           onClick={() => setSubmitted(false)}
-          className="mt-4 text-sm text-gold underline underline-offset-4 hover:text-gold-dark transition-colors"
+          className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-gold border-b border-gold/40 hover:border-gold transition-colors"
         >
           Send another message
         </button>
@@ -72,26 +81,26 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-widest text-warm-gray mb-2">
+          <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
             Full Name *
           </label>
           <input
             {...register('name')}
             type="text"
             placeholder="Priya Sharma"
-            className="w-full border border-border bg-warm-white px-4 py-3 text-sm text-dark placeholder-warm-gray/50 focus:outline-none focus:border-gold transition-colors"
+            className={fieldClass}
           />
           {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
         </div>
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-widest text-warm-gray mb-2">
+          <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
             Email *
           </label>
           <input
             {...register('email')}
             type="email"
             placeholder="priya@example.com"
-            className="w-full border border-border bg-warm-white px-4 py-3 text-sm text-dark placeholder-warm-gray/50 focus:outline-none focus:border-gold transition-colors"
+            className={fieldClass}
           />
           {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
         </div>
@@ -99,37 +108,34 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-widest text-warm-gray mb-2">
+          <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
             Phone Number *
           </label>
           <input
             {...register('phone')}
             type="tel"
             placeholder="9876543210"
-            className="w-full border border-border bg-warm-white px-4 py-3 text-sm text-dark placeholder-warm-gray/50 focus:outline-none focus:border-gold transition-colors"
+            className={fieldClass}
           />
           {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone.message}</p>}
         </div>
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-widest text-warm-gray mb-2">
+          <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
             Event Date
           </label>
           <input
             {...register('eventDate')}
             type="date"
-            className="w-full border border-border bg-warm-white px-4 py-3 text-sm text-dark focus:outline-none focus:border-gold transition-colors"
+            className={fieldClass}
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-xs font-semibold uppercase tracking-widest text-warm-gray mb-2">
+        <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
           Event Type *
         </label>
-        <select
-          {...register('eventType')}
-          className="w-full border border-border bg-warm-white px-4 py-3 text-sm text-dark focus:outline-none focus:border-gold transition-colors"
-        >
+        <select {...register('eventType')} className={fieldClass}>
           <option value="Wedding">Wedding Photography</option>
           <option value="Pre-Wedding">Pre-Wedding Shoot</option>
           <option value="Cinematography">Cinematography</option>
@@ -141,14 +147,14 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
       </div>
 
       <div>
-        <label className="block text-xs font-semibold uppercase tracking-widest text-warm-gray mb-2">
+        <label className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-dark/40 mb-2">
           Your Message *
         </label>
         <textarea
           {...register('message')}
           rows={5}
           placeholder="Tell us about your wedding vision, venue, number of guests, or anything else you'd like us to know..."
-          className="w-full border border-border bg-warm-white px-4 py-3 text-sm text-dark placeholder-warm-gray/50 focus:outline-none focus:border-gold transition-colors resize-none"
+          className={`${fieldClass} resize-none`}
         />
         {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>}
       </div>
@@ -163,10 +169,10 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gold text-dark font-semibold px-8 py-4 tracking-wide hover:bg-gold-dark transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+        className="inline-flex items-center justify-center gap-2.5 bg-dark text-warm-white font-semibold px-9 py-4 text-[11px] tracking-[0.22em] uppercase hover:bg-gold hover:text-dark transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
-          'Sending...'
+          'Sending…'
         ) : (
           <>
             <Send className="w-4 h-4" />

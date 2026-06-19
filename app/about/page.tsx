@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Award, Camera, Heart, Globe } from 'lucide-react'
+import { Dancing_Script } from 'next/font/google'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import CTABanner from '@/components/home/CTABanner'
 import SocialProof from '@/components/home/SocialProof'
 import FAQAccordion from '@/components/home/FAQAccordion'
+
+const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'About — Our Story & Philosophy',
@@ -52,11 +55,9 @@ export default function AboutPage() {
         </span>
         <div className="max-w-3xl mx-auto relative text-center">
           <ScrollReveal>
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <span className="w-10 h-px bg-gold/60" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-gold">Our Story</p>
-              <span className="w-10 h-px bg-gold/60" />
-            </div>
+            <p className={`${script.className} text-3xl md:text-4xl text-dark/55 mb-4`}>
+              Our Story
+            </p>
             <h1 className="font-serif text-5xl md:text-6xl text-dark leading-[1.06]">
               Twelve years of{' '}
               <em className="not-italic text-gold">capturing love</em>
@@ -127,13 +128,9 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="w-8 h-px bg-gold/55" />
-                <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">Recognition</p>
-                <span className="w-8 h-px bg-gold/55" />
-              </div>
+              <p className={`${script.className} text-4xl text-dark/55 mb-3`}>Recognition</p>
               <h2 className="font-serif text-4xl text-dark">
-                Proud moments from our journey
+                Proud moments from our <em className="italic text-gold">journey</em>
               </h2>
             </div>
           </ScrollReveal>
@@ -164,12 +161,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="w-8 h-px bg-gold/55" />
-                <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">Behind the Lens</p>
-                <span className="w-8 h-px bg-gold/55" />
-              </div>
-              <h2 className="font-serif text-4xl text-dark">How we work on your big day</h2>
+              <p className={`${script.className} text-4xl text-dark/55 mb-3`}>Behind the Lens</p>
+              <h2 className="font-serif text-4xl text-dark">How we work on your <em className="italic text-gold">big day</em></h2>
             </div>
           </ScrollReveal>
 

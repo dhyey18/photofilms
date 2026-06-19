@@ -1,9 +1,12 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Star } from 'lucide-react'
+import { Dancing_Script } from 'next/font/google'
 import { testimonials } from '@/data/testimonials'
 import CTABanner from '@/components/home/CTABanner'
 import ScrollReveal from '@/components/ui/ScrollReveal'
+
+const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'Testimonials — What Our Couples Say',
@@ -55,24 +58,22 @@ export default function TestimonialsPage() {
         </span>
         <div className="max-w-3xl mx-auto relative text-center">
           <ScrollReveal>
-            <div className="flex justify-center gap-1 mb-5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-gold text-gold" />
-              ))}
-            </div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold mb-4">
-              {avg} / 5 &nbsp;·&nbsp; Over 500 Couples
-            </p>
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <span className="w-10 h-px bg-gold/60" />
-            </div>
+            <p className={`${script.className} text-3xl md:text-4xl text-dark/55 mb-4`}>Client Love</p>
             <h1 className="font-serif text-5xl md:text-6xl text-dark leading-[1.08]">
               Stories from hearts{' '}
-              <em className="not-italic text-gold">we&apos;ve touched</em>
+              <em className="italic text-gold">we&apos;ve touched</em>
             </h1>
             <p className="mt-5 text-dark/45 text-lg max-w-xl mx-auto leading-relaxed">
               Every review is a love story in itself. Here is what our couples say.
             </p>
+            <div className="flex items-center justify-center gap-2 mt-6">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-gold text-gold" />
+              ))}
+              <span className="ml-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-dark/35">
+                {avg} / 5 &nbsp;·&nbsp; 500+ Couples
+              </span>
+            </div>
           </ScrollReveal>
         </div>
       </div>

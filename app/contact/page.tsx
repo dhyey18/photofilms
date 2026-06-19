@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import { MessageCircle, Phone, Mail, MapPin, Clock } from 'lucide-react'
+import { Dancing_Script } from 'next/font/google'
 import ContactForm from '@/components/contact/ContactForm'
 import ScrollReveal from '@/components/ui/ScrollReveal'
+
+const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'Contact — Book Your Date',
@@ -33,14 +36,10 @@ export default async function ContactPage({ searchParams }: Props) {
         </span>
         <div className="max-w-3xl mx-auto relative text-center">
           <ScrollReveal>
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <span className="w-10 h-px bg-gold/60" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-gold">Let&apos;s Connect</p>
-              <span className="w-10 h-px bg-gold/60" />
-            </div>
+            <p className={`${script.className} text-3xl md:text-4xl text-dark/55 mb-4`}>Let&apos;s Connect</p>
             <h1 className="font-serif text-5xl md:text-6xl text-dark leading-[1.06]">
               Start your love story{' '}
-              <em className="not-italic text-gold">with us</em>
+              <em className="italic text-gold">with us</em>
             </h1>
             <p className="mt-6 text-dark/45 text-lg max-w-md mx-auto leading-relaxed">
               Fill in the form below or reach out directly — we respond to all enquiries within 24 hours.
