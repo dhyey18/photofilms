@@ -1,14 +1,16 @@
 import type { Metadata } from 'next'
 import Hero from '@/components/home/Hero'
-import SocialProof from '@/components/home/SocialProof'
+import AwardsBar from '@/components/home/AwardsBar'
+import FounderMessage from '@/components/home/FounderMessage'
+import TimelessFilms from '@/components/home/TimelessFilms'
 import ServicesPreview from '@/components/home/ServicesPreview'
 import PortfolioPreview from '@/components/home/PortfolioPreview'
+import PortfolioScatter from '@/components/home/PortfolioScatter'
 import MarqueeStrip from '@/components/home/MarqueeStrip'
 import OurProcess from '@/components/home/OurProcess'
 import VideoShowreel from '@/components/home/VideoShowreel'
 import TestimonialsCarousel from '@/components/home/TestimonialsCarousel'
 import InstagramFeed from '@/components/home/InstagramFeed'
-import FAQAccordion from '@/components/home/FAQAccordion'
 import CTABanner from '@/components/home/CTABanner'
 
 export const metadata: Metadata = {
@@ -25,7 +27,7 @@ const jsonLd = {
   description: 'Luxury wedding photography and cinematography studio based in Vadodara, Gujarat.',
   url: 'https://photofilms.in',
   telephone: '+918866008868',
-  email: 'hello@photofilms.in',
+  email: 'storiesbyphotofilms@gmail.com',
   image: 'https://photofilms.in/images/slider/01.webp',
   address: {
     '@type': 'PostalAddress',
@@ -63,15 +65,12 @@ export default function HomePage() {
         }}
       />
       <Hero />
-      <SocialProof />
-      <MarqueeStrip />
-      <ServicesPreview />
-      <PortfolioPreview />
+      <AwardsBar />
+      <FounderMessage />
+      <TimelessFilms />
+      <PortfolioScatter />
       <OurProcess />
-      <VideoShowreel />
-      <TestimonialsCarousel />
       <InstagramFeed />
-      <FAQAccordion />
       <CTABanner />
     </>
   )

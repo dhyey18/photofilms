@@ -11,11 +11,9 @@ const LOGO_SRC = 'https://photofilms.in/images/logolight-photofilms.svg'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/about', label: 'About' },
-  // { href: '/pricing', label: 'Pricing' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ]
@@ -51,21 +49,21 @@ export default function Navigation() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center">
+        {/* Logo — left */}
+        <Link href="/" className="flex items-center shrink-0">
           <Image
             src={LOGO_SRC}
             alt="Photofilms"
             width={160}
             height={40}
-            className={`h-9 w-auto transition-all duration-300 ${
+            className={`h-12 w-auto transition-all duration-300 ${
               scrolled || menuOpen || !isHome ? 'brightness-0' : 'brightness-100'
             }`}
             priority
           />
         </Link>
 
-        {/* Desktop nav */}
+        {/* Desktop nav — right */}
         <ul className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => {
             const isActive = pathname === link.href
@@ -90,16 +88,6 @@ export default function Navigation() {
             )
           })}
         </ul>
-
-        {/* Desktop CTA */}
-        <div className="hidden lg:block">
-          <Link
-            href="/contact"
-            className="bg-gold text-dark text-sm font-semibold px-6 py-2.5 tracking-wide hover:bg-gold-dark transition-colors duration-200"
-          >
-            Book Your Date
-          </Link>
-        </div>
 
         {/* Mobile hamburger */}
         <button
@@ -141,19 +129,6 @@ export default function Navigation() {
                   </Link>
                 </motion.li>
               ))}
-              <motion.li
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.05 }}
-                className="pt-4"
-              >
-                <Link
-                  href="/contact"
-                  className="block w-full text-center bg-gold text-dark font-semibold py-3 tracking-wide hover:bg-gold-dark transition-colors"
-                >
-                  Book Your Date
-                </Link>
-              </motion.li>
             </ul>
           </motion.div>
         )}

@@ -15,7 +15,7 @@ export default function StoryGallery({ photos }: { photos: Photo[] }) {
           <button
             key={i}
             onClick={() => setLightboxIndex(i)}
-            className="group relative aspect-square overflow-hidden bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="group relative aspect-square overflow-hidden bg-[#faf8f5] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             aria-label={`View photo: ${photo.alt}`}
           >
             <Image

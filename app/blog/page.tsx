@@ -2,9 +2,12 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Clock, ArrowRight } from 'lucide-react'
+import { Dancing_Script } from 'next/font/google'
 import { blogPosts } from '@/data/blog'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import CTABanner from '@/components/home/CTABanner'
+
+const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'Blog — Wedding Photography Tips & Venue Guides',
@@ -36,14 +39,10 @@ export default function BlogPage() {
 
         <div className="max-w-4xl mx-auto relative text-center">
           <ScrollReveal>
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <span className="w-10 h-px bg-gold/60" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Our Journal</p>
-              <span className="w-10 h-px bg-gold/60" />
-            </div>
+            <p className={`${script.className} text-3xl md:text-4xl text-dark/55 mb-4`}>Our Journal</p>
             <h1 className="font-serif text-5xl md:text-6xl lg:text-[4.5rem] text-dark leading-[1.06]">
               From our lens,{' '}
-              <em className="not-italic text-gold">to your heart</em>
+              <em className="italic text-gold">to your heart</em>
             </h1>
             <p className="mt-6 text-dark/45 text-lg max-w-md mx-auto leading-relaxed">
               Stories, guides, and behind-the-scenes from the studio.

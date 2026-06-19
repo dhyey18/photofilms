@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import { MessageCircle, Phone, Mail, MapPin, Clock } from 'lucide-react'
+import { Dancing_Script } from 'next/font/google'
 import ContactForm from '@/components/contact/ContactForm'
 import ScrollReveal from '@/components/ui/ScrollReveal'
+
+const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'Contact — Book Your Date',
@@ -33,14 +36,10 @@ export default async function ContactPage({ searchParams }: Props) {
         </span>
         <div className="max-w-3xl mx-auto relative text-center">
           <ScrollReveal>
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <span className="w-10 h-px bg-gold/60" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-gold">Let&apos;s Connect</p>
-              <span className="w-10 h-px bg-gold/60" />
-            </div>
+            <p className={`${script.className} text-3xl md:text-4xl text-dark/55 mb-4`}>Let&apos;s Connect</p>
             <h1 className="font-serif text-5xl md:text-6xl text-dark leading-[1.06]">
               Start your love story{' '}
-              <em className="not-italic text-gold">with us</em>
+              <em className="italic text-gold">with us</em>
             </h1>
             <p className="mt-6 text-dark/45 text-lg max-w-md mx-auto leading-relaxed">
               Fill in the form below or reach out directly — we respond to all enquiries within 24 hours.
@@ -63,7 +62,7 @@ export default async function ContactPage({ searchParams }: Props) {
                 <ul className="space-y-6">
                   {[
                     { icon: Phone, label: 'Phone / WhatsApp', value: '+91 88660 08868', href: 'tel:+918866008868' },
-                    { icon: Mail,  label: 'Email',            value: 'hello@photofilms.in', href: 'mailto:hello@photofilms.in' },
+                    { icon: Mail,  label: 'Email',            value: 'storiesbyphotofilms@gmail.com', href: 'mailto:storiesbyphotofilms@gmail.com' },
                     { icon: MapPin, label: 'Studio',          value: 'Vadodara, Gujarat, India' },
                     { icon: Clock, label: 'Response Time',    value: 'Within 24 hours' },
                   ].map(({ icon: Icon, label, value, href }) => (
@@ -99,21 +98,6 @@ export default async function ContactPage({ searchParams }: Props) {
                 Quick WhatsApp Inquiry
               </a>
             </ScrollReveal>
-
-            <ScrollReveal delay={0.2}>
-              <div className="overflow-hidden border border-dark/[0.08]">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118374.70272754395!2d73.08120365!3d22.3071588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8ab91a3ddab%3A0xac39d3bfe1473fb8!2sVadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1699000000000"
-                  width="100%"
-                  height="220"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Photofilms studio location in Vadodara, Gujarat"
-                />
-              </div>
-            </ScrollReveal>
           </div>
 
           {/* Form */}
@@ -124,10 +108,10 @@ export default async function ContactPage({ searchParams }: Props) {
                   Send an Enquiry
                 </p>
                 <h2 className="font-serif text-2xl md:text-3xl text-dark mb-2">
-                  Tell us about your wedding
+                  Tell us about your big day
                 </h2>
                 <p className="text-dark/40 text-sm mb-8 leading-relaxed">
-                  Share your vision and we&apos;ll reply with availability and package options.
+                  Share the details — date, venue, functions — and we&apos;ll reply with availability and package options within 24 hours.
                 </p>
                 <ContactForm defaultService={service} />
               </div>

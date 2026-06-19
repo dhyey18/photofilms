@@ -74,7 +74,7 @@ function FilmStrip({ src }: { src: string }) {
 /* ── Single editorial section (quote + image) ────────── */
 function EditorialSection({ section, reversed }: { section: StorySection; reversed: boolean }) {
   const quoteCol = (
-    <div className="flex items-center justify-center px-8 py-16 md:px-16 md:py-24 bg-cream">
+    <div className="flex items-center justify-center px-8 py-16 md:px-16 md:py-24 bg-[#faf8f5]">
       <div className="max-w-md text-center">
         {/* Decorative open-quote */}
         <span
@@ -139,11 +139,11 @@ export default async function StoryPage({ params }: Props) {
   return (
     <>
       {/* ── Editorial header ──────────────────────────────── */}
-      <div className="bg-cream pt-28 md:pt-36 pb-16 px-6 border-b border-border">
+      <div className="bg-[#faf8f5] pt-28 md:pt-36 pb-16 px-6 border-b border-dark/[0.06]">
         <div className="max-w-7xl mx-auto">
           <Link
             href="/portfolio"
-            className="inline-flex items-center gap-2 text-warm-gray hover:text-gold text-xs font-semibold uppercase tracking-[0.15em] mb-10 transition-colors"
+            className="inline-flex items-center gap-2 text-dark/35 hover:text-gold text-xs font-semibold uppercase tracking-[0.15em] mb-10 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             All Stories
@@ -205,7 +205,7 @@ export default async function StoryPage({ params }: Props) {
 
       {/* ── Film strip image ───────────────────────────────── */}
       {story.filmStripImage && (
-        <div className="py-14 px-6 bg-cream">
+        <div className="py-14 px-6 bg-[#faf8f5]">
           <div className="max-w-5xl mx-auto">
             <FilmStrip src={story.filmStripImage} />
           </div>
@@ -214,7 +214,7 @@ export default async function StoryPage({ params }: Props) {
 
       {/* ── Gallery ────────────────────────────────────────── */}
       {story.photos.length > 0 && (
-        <section className="py-20 px-6 bg-cream">
+        <section className="py-20 px-6 bg-[#faf8f5]">
           <div className="max-w-7xl mx-auto">
             <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold mb-2">
               The Gallery

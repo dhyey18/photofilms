@@ -4,7 +4,6 @@ import Navigation from '@/components/layout/Navigation'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import ScrollProgressBar from '@/components/ui/ScrollProgressBar'
-import AudioToggle from '@/components/ui/AudioToggle'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -83,7 +82,6 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppButton />
-        <AudioToggle />
       </body>
     </html>
   )
