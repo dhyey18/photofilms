@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail } from 'lucide-react'
 
 const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 'swap' })
 
-const LOGO_SRC = '/logo.png'
+const LOGO_SRC = 'https://photofilms.in/images/logolight-photofilms.svg'
 
 const quickLinks = [
   { href: '/portfolio',    label: 'Gallery' },
@@ -54,7 +54,7 @@ export default function Footer() {
                 alt="Photofilms"
                 width={200}
                 height={52}
-                className="h-36 w-auto brightness-0"
+                className="h-14 w-auto brightness-0"
               />
             </Link>
             <p className="text-sm leading-relaxed text-dark/45 max-w-xs mb-6">

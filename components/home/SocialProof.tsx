@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion'
 
 const stats = [
   { target: 500, suffix: '+', label: 'Happy Couples', desc: 'Across India & abroad' },
-  { target: 10, suffix: '+', label: 'Years Together', desc: 'Crafting love stories since 2016' },
+  { target: 12, suffix: '+', label: 'Years Together', desc: 'Crafting love stories since 2012' },
   { target: 50, suffix: '+', label: 'Cities Covered', desc: 'From Kashmir to Kerala' },
   { target: 2000, suffix: '+', label: 'Wedding Days', desc: 'Moments preserved forever' },
 ]

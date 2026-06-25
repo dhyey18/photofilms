@@ -87,15 +87,6 @@ body {
   animation: text-shimmer 4s linear infinite;
 }
 
-/* ─── Gallery fade-in on category switch ──────────── */
-@keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-.animate-fadein {
-  animation: fadein 0.35s ease;
-}
-
 /* ─── Underline grow (nav hover) ───────────────────── */
 .underline-grow {
   position: relative;

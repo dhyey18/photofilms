@@ -12,7 +12,7 @@ const script = Dancing_Script({ subsets: ['latin'], weight: ['700'], display: 's
 export const metadata: Metadata = {
   title: 'About — Our Story & Philosophy',
   description:
-    'Meet the Photofilms team — passionate wedding photographers and cinematographers based in Vadodara, Gujarat with over 10 years of experience capturing love stories across India.',
+    'Meet the Photofilms team — passionate wedding photographers and cinematographers based in Vadodara, Gujarat with over 12 years of experience capturing love stories across India.',
 }
 
 const achievements = [

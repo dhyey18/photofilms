@@ -7,22 +7,11 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
-type NavLink = {
-  href: string
-  label: string
-  dropdown?: { href: string; label: string }[]
-}
+const LOGO_SRC = 'https://photofilms.in/images/logolight-photofilms.svg'
 
-const navLinks: NavLink[] = [
+const navLinks = [
   { href: '/', label: 'Home' },
-  {
-    href: '/portfolio',
-    label: 'Gallery',
-    dropdown: [
-      { href: '/portfolio', label: 'Wedding' },
-      { href: '/portfolio/pre-wedding', label: 'Pre Wedding' },
-    ],
-  },
+  { href: '/portfolio', label: 'Gallery' },
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/about', label: 'About' },
   { href: '/blog', label: 'Blog' },
@@ -50,24 +39,25 @@ export default function Navigation() {
   }, [menuOpen])
 
   const isHome = pathname === '/'
-  const isLight = scrolled || menuOpen || !isHome
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isLight ? 'bg-warm-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
+        scrolled || menuOpen || !isHome
+          ? 'bg-warm-white/95 backdrop-blur-sm shadow-sm'
+          : 'bg-transparent'
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo — left */}
         <Link href="/" className="flex items-center shrink-0">
           <Image
-            src="/logo.png"
+            src={LOGO_SRC}
             alt="Photofilms"
             width={160}
             height={40}
-            className={`h-36 w-auto transition-all duration-300 ${
-              isLight ? 'brightness-0' : 'brightness-100'
+            className={`h-12 w-auto transition-all duration-300 ${
+              scrolled || menuOpen || !isHome ? 'brightness-0' : 'brightness-100'
             }`}
             priority
           />
@@ -76,38 +66,24 @@ export default function Navigation() {
         {/* Desktop nav — right */}
         <ul className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
-            const linkClass = `
-              relative inline-block text-sm font-medium tracking-wide transition-colors duration-200 pb-0.5
-              after:absolute after:bottom-0 after:left-0 after:h-px after:transition-all after:duration-300
-              ${isActive
-                ? 'text-gold after:w-full after:bg-gold'
-                : isLight
-                ? 'text-dark-muted hover:text-dark after:w-0 after:bg-dark hover:after:w-full'
-                : 'text-warm-white/80 hover:text-warm-white after:w-0 after:bg-warm-white hover:after:w-full'
-              }
-            `
+            const isActive = pathname === link.href
             return (
-              <li key={link.href} className="relative group/nav">
-                <Link href={link.href} className={linkClass}>
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`
+                    relative inline-block text-sm font-medium tracking-wide transition-colors duration-200 pb-0.5
+                    after:absolute after:bottom-0 after:left-0 after:h-px after:transition-all after:duration-300
+                    ${isActive
+                      ? 'text-gold after:w-full after:bg-gold'
+                      : scrolled || !isHome
+                      ? 'text-dark-muted hover:text-dark after:w-0 after:bg-dark hover:after:w-full'
+                      : 'text-warm-white/80 hover:text-warm-white after:w-0 after:bg-warm-white hover:after:w-full'
+                    }
+                  `}
+                >
                   {link.label}
                 </Link>
-
-                {link.dropdown && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible pointer-events-none group-hover/nav:opacity-100 group-hover/nav:visible group-hover/nav:pointer-events-auto transition-all duration-200">
-                    <div className="bg-warm-white border border-dark/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.08)] py-1.5 min-w-[160px]">
-                      {link.dropdown.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block px-5 py-2.5 text-sm font-medium text-dark/55 hover:text-dark hover:bg-dark/[0.03] transition-colors tracking-wide"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </li>
             )
           })}
@@ -117,7 +93,7 @@ export default function Navigation() {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className={`lg:hidden p-2 transition-colors ${
-            isLight ? 'text-dark' : 'text-warm-white'
+            scrolled || menuOpen || !isHome ? 'text-dark' : 'text-warm-white'
           }`}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         >
@@ -151,15 +127,6 @@ export default function Navigation() {
                   >
                     {link.label}
                   </Link>
-                  {link.dropdown?.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block py-2 pl-4 text-base text-dark/45 hover:text-gold transition-colors"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
                 </motion.li>
               ))}
             </ul>

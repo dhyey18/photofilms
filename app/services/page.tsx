@@ -172,7 +172,7 @@ export default function ServicesPage() {
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-dark/[0.06]">
           {[
             { number: '500+', label: 'Weddings Shot' },
-            { number: '10+',  label: 'Years of Craft' },
+            { number: '12+',  label: 'Years of Craft' },
             { number: '4K',   label: 'Ultra HD Films' },
             { number: '100%', label: 'Client Satisfaction' },
           ].map((stat) => (
