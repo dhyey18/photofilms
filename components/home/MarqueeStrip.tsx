@@ -6,7 +6,7 @@ const items = [
   'Destination Weddings · India · Thailand · Dubai',
   '★ Award-Winning Cinematography',
   '50+ Cities Across India',
-  '12 Years of Excellence Since 2012',
+  '10 Years of Excellence',
   'Trusted by 2000+ Families',
 ]
 

@@ -27,7 +27,7 @@ export default function PortfolioPage() {
   return (
     <>
       {/* ── Header ──────────────────────────────────────────── */}
-      <div className="bg-[#faf8f5] pt-36 pb-20 px-6 relative overflow-hidden border-b border-dark/[0.06]">
+      {/* <div className="bg-[#faf8f5] pt-36 pb-20 px-6 relative overflow-hidden border-b border-dark/[0.06]">
         <span
           aria-hidden
           className="absolute inset-0 flex items-center justify-center pointer-events-none select-none font-serif font-bold leading-none"
@@ -55,7 +55,7 @@ export default function PortfolioPage() {
             </div>
           </ScrollReveal>
         </div>
-      </div>
+      </div> */}
 
       {/* ── Gallery (client component) ───────────────────────── */}
       <PortfolioGallery weddingPhotos={weddingPhotos} prewedPhotos={prewedPhotos} />

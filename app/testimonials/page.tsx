@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 }
 
 const IMAGES = Array.from({ length: 8 }, (_, i) =>
-  `/Testimonial/Testimonial/${String(i + 1).padStart(2, '0')}.jpg`
+  `/Testimonial/Testimonial/${String(i).padStart(2, '0')}.jpg`
 )
 
 export default function TestimonialsPage() {
@@ -24,7 +24,7 @@ export default function TestimonialsPage() {
   return (
     <>
       {/* ── Header ──────────────────────────────────────── */}
-      <div className="bg-[#faf8f5] pt-36 pb-20 px-6 relative overflow-hidden border-b border-dark/[0.06]">
+      {/* <div className="bg-[#faf8f5] pt-36 pb-20 px-6 relative overflow-hidden border-b border-dark/[0.06]">
         <span
           aria-hidden
           className="absolute inset-0 flex items-center justify-center pointer-events-none select-none font-serif font-bold leading-none"
@@ -52,7 +52,7 @@ export default function TestimonialsPage() {
             </div>
           </ScrollReveal>
         </div>
-      </div>
+      </div> */}
 
       {/* ── Image Gallery ───────────────────────────────── */}
       <section className="bg-[#faf8f5] py-16 md:py-24 px-6 lg:px-20">
@@ -79,7 +79,7 @@ export default function TestimonialsPage() {
           {[
             { number: '5.0',  label: 'Average Rating', sub: 'Out of 5 stars' },
             { number: '500+', label: 'Happy Couples',  sub: 'Across India' },
-            { number: '12+',  label: 'Years of Trust', sub: 'Since 2012' },
+            { number: '10+',  label: 'Years of Trust', sub: 'Since 2016' },
           ].map((stat) => (
             <div key={stat.label} className="bg-white px-8 py-10 text-center">
               <div className="w-8 h-px bg-gold/55 mx-auto mb-5" />
